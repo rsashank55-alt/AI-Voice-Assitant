@@ -694,16 +694,19 @@ function stripCallNamePrefix(text) {
   const name = assistantState.callName ? assistantState.callName.trim() : "";
   if (!name) return trimmed;
   const escaped = escapeRegExp(name);
-  const pattern = new RegExp(
-    "^(?:hey|hi|hello|hola|ok|okay|yo|hiya|hey there)?\\s*(?:,\\s*)?" +
-      escaped +
-      "(?:[,!?:\\s]+)?",
+  const greetings = "(?:hey|hi|hello|hola|ok|okay|yo|hiya|hey there)";
+  const prefixPattern = new RegExp(
+    `^${greetings}?\\s*(?:,\\s*)?${escaped}(?:[,!?:\\s]+)?`,
     "i"
   );
-  if (pattern.test(trimmed)) {
-    return trimmed.replace(pattern, "");
+  const anywherePattern = new RegExp(`\\b${escaped}\\b[,!?:\\s]*`, "i");
+  let result = trimmed;
+  if (prefixPattern.test(result)) {
+    result = result.replace(prefixPattern, "");
+  } else if (anywherePattern.test(result)) {
+    result = result.replace(anywherePattern, "");
   }
-  return trimmed;
+  return result.trimStart();
 }
 
 function escapeRegExp(value) {
