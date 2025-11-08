@@ -372,7 +372,7 @@ async function queryAssistant(content) {
   try {
     const payload = {
       messages: buildConversationPayload(content),
-      model: "gpt-4.1-nano",
+      model: "playai-tts",
       max_tokens: 1000,
       temperature: 0.7,
     };
