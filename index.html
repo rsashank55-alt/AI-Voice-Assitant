@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Euri Voice Assistant</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="app-shell">
+      <aside class="sidebar" aria-label="Quick actions and status">
+        <div class="brand">
+          <div class="brand-logo" aria-hidden="true">EA</div>
+          <div>
+            <h1>Euri Assistant</h1>
+            <p class="brand-tagline">Always listening, always learning.</p>
+          </div>
+        </div>
+        <section class="panel status-panel">
+          <h2>Status</h2>
+          <div class="status-row">
+            <span>Connection</span>
+            <span class="status-indicator" id="status-connection">Online</span>
+          </div>
+          <div class="status-row">
+            <span>Voice</span>
+            <span class="status-indicator" id="status-voice">Idle</span>
+          </div>
+          <div class="status-row">
+            <span>Reminders</span>
+            <span class="status-indicator" id="status-reminders">0</span>
+          </div>
+        </section>
+        <section class="panel history-panel">
+          <div class="history-header">
+            <h2>History</h2>
+            <button id="button-new-session" class="ghost small" type="button">New</button>
+          </div>
+          <ul id="history-list" class="history-list" role="list"></ul>
+          <div id="history-preview" class="history-preview" aria-live="polite"></div>
+        </section>
+        <section class="panel commands-panel">
+          <h2>Suggested prompts</h2>
+          <ul id="suggestion-list" class="suggestion-list" role="list"></ul>
+        </section>
+        <section class="panel preferences-panel">
+          <h2>Preferences</h2>
+          <div class="input-row">
+            <label for="input-call-name">Call name</label>
+            <input
+              id="input-call-name"
+              type="text"
+              maxlength="24"
+              placeholder="Euri"
+              autocomplete="off"
+            />
+          </div>
+          <div class="toggle-row">
+            <span>Auto speak responses</span>
+            <label class="switch">
+              <input type="checkbox" id="toggle-speech" />
+              <span class="slider"></span>
+            </label>
+          </div>
+          <div class="toggle-row">
+            <span>Compact bubbles</span>
+            <label class="switch">
+              <input type="checkbox" id="toggle-compact" />
+              <span class="slider"></span>
+            </label>
+          </div>
+        </section>
+      </aside>
+
+      <main class="chat-pane" aria-live="polite">
+        <header class="chat-header">
+          <div>
+            <h2>Command Center</h2>
+            <p id="chat-subtitle">Ask anything or say “Hey Euri…”</p>
+          </div>
+          <div class="header-actions">
+            <button id="button-clear" class="ghost" aria-label="Clear chat">
+              Clear Chat
+            </button>
+            <button id="button-export" class="ghost" aria-label="Export chat transcript">
+              Export
+            </button>
+          </div>
+        </header>
+
+        <section id="conversation" class="conversation" role="log"></section>
+
+        <footer class="chat-composer">
+          <button
+            id="button-voice"
+            class="icon-button"
+            aria-label="Start voice command"
+            title="Tap or press Space to hold-to-talk"
+          >
+            <svg aria-hidden="true" viewBox="0 0 24 24" focusable="false">
+              <path
+                d="M12 14a3 3 0 0 0 3-3V6a3 3 0 0 0-6 0v5a3 3 0 0 0 3 3Zm5-3a5 5 0 0 1-10 0H5a7 7 0 0 0 6 6.93V20h2v-2.07A7 7 0 0 0 19 11h-2Z"
+              />
+            </svg>
+          </button>
+          <textarea
+            id="input-text"
+            rows="1"
+            placeholder="Type your request or say “Hey Euri…”"
+            aria-label="Type your request"
+          ></textarea>
+          <button id="button-send" class="primary" aria-label="Send message">
+            Send
+          </button>
+        </footer>
+      </main>
+    </div>
+
+    <div class="toast-container" role="status" aria-live="assertive"></div>
+
+    <template id="message-template">
+      <article class="message">
+        <div class="avatar" aria-hidden="true"></div>
+        <div class="bubble">
+          <header class="meta">
+            <span class="author"></span>
+            <span class="timestamp"></span>
+          </header>
+          <div class="content"></div>
+        </div>
+      </article>
+    </template>
+
+    <script src="app.js?v=2" type="module"></script>
+  </body>
+</html>
+
