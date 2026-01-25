@@ -1,5 +1,5 @@
 const API_URL = "https://api.euron.one/api/v1/euri/chat/completions";
-const API_KEY = "euri-d0c00732524b1b5ae66443fd154d33e118a6d7c22f2ce04a823f9bf58a3125df";
+const API_KEY = "euri-cb7daa725057af44359826818b2dcca74ab7207d4f68ae7caac7e8f490647136";
 
 const STORAGE_KEYS = {
   callName: "euriCallName",
@@ -372,7 +372,7 @@ async function queryAssistant(content) {
   try {
     const payload = {
       messages: buildConversationPayload(content),
-      model: "playai-tts",
+      model: "gemini-2.5-pro",
       max_tokens: 1000,
       temperature: 0.7,
     };
